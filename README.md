@@ -16,13 +16,9 @@ DataClean-Env challenges LLM agents to clean realistic tabular datasets — null
 [![HF Spaces](https://img.shields.io/badge/HuggingFace-Spaces-orange)](https://huggingface.co/spaces/Jxth/DataClean_Env)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue)](./Dockerfile)
+[![YouTube Demo](https://img.shields.io/badge/YouTube-Demo_Video-red)](#) <!-- REPLACE '#' WITH YOUR YOUTUBE URL -->
 
 ---
-
-## 📝 Hackathon Submission Materials
-* **[Read our Hackathon Blog Post: Training Enterprise Agents via Curriculum Shock](./blog.md)**
-* **HuggingFace Space:** [Jxth/DataClean_Env](https://huggingface.co/spaces/Jxth/DataClean_Env)
-* **Training Code:** Google Colab Notebooks and `training_script.py` are included in the repository files.
 
 ## Quick Start
 

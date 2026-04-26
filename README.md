@@ -1,12 +1,4 @@
----
-title: DataClean-Env
-emoji: 🧹
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_file: server.py
-pinned: false
----
+
 # DataClean-Env
 **An OpenEnv-compliant reinforcement learning environment for data cleaning agents.**
 

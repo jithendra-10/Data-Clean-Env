@@ -1,12 +1,3 @@
----
-title: DataClean-Env
-emoji: 🧹
-colorFrom: blue
-colorTo: indigo
-sdk: docker
-app_file: server.py
-pinned: false
----
 # DataClean-Env
 
 **An OpenEnv-compliant reinforcement learning environment for data cleaning agents.**
@@ -271,7 +262,7 @@ Model: `meta-llama/Meta-Llama-3-70B-Instruct` · Provider: HuggingFace router ·
 from baseline.agent import NemotronAgentWrapper
 
 agent = NemotronAgentWrapper(
-    server_url="https://huggingface.co/spaces/jithendra/dataclean-env"
+    server_url="https://huggingface.co/spaces/Jxth/DataClean_Env"
 )
 obs    = agent.reset(task_id="task_1", seed=42)
 action = agent.step(obs)
@@ -323,7 +314,7 @@ DataClean-Env features a professional Gradio interface with two distinct modes:
 1. Create Space → SDK: **Docker**, tag: `openenv`
 2. Push all repo files
 3. Add Space secrets: `HF_TOKEN`, `API_BASE_URL`, `MODEL_NAME`
-4. Run: `openenv validate --url https://huggingface.co/spaces/YOUR_USERNAME/dataclean-env`
+4. Run: `openenv validate --url https://huggingface.co/spaces/Jxth/DataClean_Env`
 
 ---
 

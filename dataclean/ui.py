@@ -442,22 +442,23 @@ def build_gradio_app(env_factory: Callable) -> Any:
         with gr.Tabs():
             # ──────────────────────────────────────────────────────────────
             with gr.Tab("Overview"):
-                with gr.Accordion("How to read this UI (judges + first-time users)", open=True):
+                with gr.Accordion("Platform Navigation & Key Metrics", open=True):
                     gr.Markdown(
-                        "**Top bar (always visible on every tab)** — live episode KPIs: current **Step**, "
+                        "**Top Bar (Always Visible)** — Live episode KPIs: current **Step**, "
                         "remaining **Budget**, aggregate **Quality** (0–1 preview from the dataframe), "
                         "cumulative **Total Reward** (RL training signal), and **Provenance** "
                         "(whether every successful op can be replayed from the raw table).\n\n"
-                        "**Tabs**\n"
-                        "- **Overview** — motivation + stack + how to navigate the demo.\n"
-                        "- **Manual Console** — you drive `reset → step → … → grade` like an RL rollout; "
-                        "reward breakdown shows *why* each step scored the way it did.\n"
-                        "- **Agent Copilot** — an LLM calls the same action JSON your code would; "
-                        "errors usually mean the model ID is not enabled on your HF Inference Router account.\n"
-                        "- **API** — exact HTTP endpoints OpenEnv validators hit (`/docs` for OpenAPI).\n\n"
-                        "**Two different “scores” judges care about**\n"
-                        "1. **Per-step reward** — dense learning signal (can be negative).\n"
-                        "2. **Grade snapshot / `POST /grader`** — official task grader on the *current* table (0–1)."
+                        "**Navigation Tabs**\n"
+                        "- **Overview** — Platform motivation, tech stack, and navigation guide.\n"
+                        "- **Manual Console** — Step-by-step human control (`reset → step → … → grade`) to simulate an RL rollout. "
+                        "Reward breakdown explicitly details the causal shaping of each action.\n"
+                        "- **Agent Copilot** — Connects a hosted LLM to autonomously issue JSON actions. "
+                        "*(Note: Requires a valid HF Inference Token with the selected model enabled)*.\n"
+                        "- **API** — Comprehensive REST endpoints that OpenEnv validators interact with. "
+                        "Full OpenAPI documentation is automatically generated at `/docs`.\n\n"
+                        "**Core Evaluation Metrics**\n"
+                        "1. **Per-Step Reward** — The dense learning signal returned after every action (can be negative for destructive operations).\n"
+                        "2. **Grade Snapshot (`POST /grader`)** — The deterministic, final task score evaluated against the current table state (0–1)."
                     )
                 with gr.Row():
                     with gr.Column(scale=2):
@@ -503,20 +504,20 @@ def build_gradio_app(env_factory: Callable) -> Any:
 
             # ──────────────────────────────────────────────────────────────
             with gr.Tab("Manual Console"):
-                with gr.Accordion("Step-by-step: what each control does (judges)", open=True):
+                with gr.Accordion("Step-by-step: Workspace Controls", open=True):
                     gr.Markdown(
-                        "1. **Dataset + Seed** — picks which synthetic corruption profile you load; "
-                        "same seed ⇒ same dirty table (reproducible judging).\n"
-                        "2. **Reset Episode** — calls the same logic as `POST /reset` and fills "
-                        "**Live Observation** (column stats, flags, quality preview).\n"
-                        "3. **Action Console** — one RL step: choose `action_type`, optional `column`, "
-                        "params (strategy / dtype / clip method), and **Confidence** (affects reward).\n"
-                        "4. **Execute Action** — applies the op and shows **Last action result** + "
-                        "updates **Reward breakdown** (JSON) and the **Reward Timeline**.\n"
-                        "5. **Official grader** — the **Grade snapshot** button sits **immediately above** "
-                        "the grade JSON; it mirrors `POST /grader` (0–1 score + provenance + quality axes).\n\n"
-                        "**Tip:** `Quality` in the top strip is a *fast preview*; **Grade snapshot** is the "
-                        "authoritative task score for reporting."
+                        "1. **Dataset + Seed** — Select the synthetic corruption profile; "
+                        "maintaining the same seed ensures a reproducible environment.\n"
+                        "2. **Reset Episode** — Initializes the environment (`POST /reset`) and generates the "
+                        "**Live Observation** state (column stats, corruption flags, and quality preview).\n"
+                        "3. **Action Console** — Construct a single RL action payload: select `action_type`, target `column`, "
+                        "parameters (strategy / dtype / clip method), and your **Confidence** interval.\n"
+                        "4. **Execute Action** — Submits the payload to the Gym, returning the **Last action result**, "
+                        "a detailed **Reward breakdown** (JSON), and updating the **Reward Timeline**.\n"
+                        "5. **Official Grader** — The **Grade snapshot** evaluates the current DataFrame "
+                        "against the deterministic validator (`POST /grader`), returning a final 0–1 score and provenance status.\n\n"
+                        "**Tip:** The `Quality` metric in the top strip is a fast heuristic preview. The **Grade snapshot** is the "
+                        "authoritative task score."
                     )
                 with gr.Row():
                     task_dd = gr.Dropdown(
@@ -524,7 +525,7 @@ def build_gradio_app(env_factory: Callable) -> Any:
                         label="Dataset",
                     )
                     seed_num = gr.Number(value=42, label="Seed", precision=0)
-                    reset_btn = gr.Button("Reset Episode", variant="primary")
+                    reset_btn = gr.Button("🔄 Reset Environment", variant="primary")
 
                 with gr.Accordion("Difficulty Tiers", open=False):
                     gr.Markdown(
@@ -583,7 +584,7 @@ def build_gradio_app(env_factory: Callable) -> Any:
                                 value="iqr", label="clip_outliers method",
                             )
                         with gr.Row():
-                            step_btn = gr.Button("Execute Action", variant="primary")
+                            step_btn = gr.Button("⚡ Execute Action", variant="primary")
 
                         reward_box = gr.Code(
                             label="Reward breakdown (this step — RL shaping, JSON)",
@@ -599,7 +600,7 @@ def build_gradio_app(env_factory: Callable) -> Any:
                             "This does **not** advance the episode; it only evaluates the current dataframe "
                             "with the task’s deterministic grader (what judges should record)."
                         )
-                        grade_btn = gr.Button("Grade snapshot (official 0–1)", variant="secondary")
+                        grade_btn = gr.Button("📊 Grade Snapshot (0-1 Score)", variant="primary")
                         grade_box = gr.Code(
                             label="Grade snapshot (JSON — score + provenance + quality axes)",
                             language="json",
@@ -688,8 +689,8 @@ def build_gradio_app(env_factory: Callable) -> Any:
                                 file_types=[".csv"],
                             )
                         with gr.Row():
-                            start_copilot_btn = gr.Button("Start Run", variant="primary")
-                            stop_copilot_btn = gr.Button("Stop", variant="stop")
+                            start_copilot_btn = gr.Button("🚀 Start Autonomous Run", variant="primary")
+                            stop_copilot_btn = gr.Button("🛑 Stop Copilot", variant="stop")
 
                         try:
                             copilot_chatbot = gr.Chatbot(

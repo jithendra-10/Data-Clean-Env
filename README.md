@@ -1,5 +1,13 @@
+---
+title: DataClean-Env
+emoji: 🧹
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_file: server.py
+pinned: false
+---
 # DataClean-Env
-
 **An OpenEnv-compliant reinforcement learning environment for data cleaning agents.**
 
 DataClean-Env challenges LLM agents to clean realistic tabular datasets — null imputation, dtype correction, outlier clipping, deduplication, and more. Every episode is reproducible via a seeded generator. Every grader is a deterministic pandas assertion.

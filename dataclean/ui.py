@@ -161,11 +161,35 @@ footer { display: none !important; }
 }
 .gr-textbox:focus-within, .gr-input:focus-within { border-color: var(--accent) !important; }
 
-/* Tabs */
-.tab-nav button { font-family: var(--mono) !important; letter-spacing: .12em !important;
-    text-transform: uppercase !important; font-size: 11px !important; }
-.tab-nav button.selected { color: var(--accent-2) !important;
-    border-bottom: 2px solid var(--accent-2) !important; }
+/* Tabs - Premium Navigation */
+.tab-nav {
+    border-bottom: 1px solid var(--line) !important;
+    margin-bottom: 20px !important;
+    flex-wrap: wrap !important; /* Makes it responsive on mobile */
+    gap: 8px !important;
+}
+.tab-nav button {
+    font-family: var(--display) !important;
+    font-weight: 600 !important;
+    letter-spacing: .02em !important;
+    font-size: 15px !important;
+    padding: 14px 24px !important;
+    color: var(--text-1) !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid transparent !important;
+    border-radius: 8px 8px 0 0 !important;
+    transition: all 0.2s ease !important;
+}
+.tab-nav button:hover {
+    color: var(--text-0) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+}
+.tab-nav button.selected {
+    color: var(--accent-2) !important;
+    border-bottom: 3px solid var(--accent-2) !important;
+    background: linear-gradient(180deg, transparent 50%, rgba(0, 212, 255, 0.1) 100%) !important;
+}
 
 /* Code/markdown */
 .prose code, code {

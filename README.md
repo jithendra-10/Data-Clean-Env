@@ -70,6 +70,42 @@ DataClean-Env fills that gap:
 - **Confidence calibration** — rewards calibrated agents, penalises overconfidence
 - **Professional Gradio web UI** at `/` (legacy `/web` redirects to `/`)
 
+### System Architecture
+
+```mermaid
+graph TD
+    subgraph UI["User Interface & Sandbox"]
+        Server[FastAPI + Gradio<br/>server.py]
+        Copilot[Agent Copilot Mode]
+        Inspector[Manual Inspector Mode]
+        Server --> Copilot
+        Server --> Inspector
+    end
+
+    subgraph Core["Core Environment (OpenEnv Compliant)"]
+        Env{DataClean-Env Gym<br/>env.py}
+        Tasks[Task Generators<br/>tasks.py]
+        Reward[Causal Reward Function]
+        Provenance[Ops Log & Provenance]
+        
+        Env --> Tasks
+        Env --> Reward
+        Env --> Provenance
+    end
+
+    subgraph RL["Machine Learning Pipeline"]
+        Script[GRPO Training<br/>training_script.py]
+        TRL[HuggingFace TRL & Unsloth]
+        LLM((LLMs<br/>Llama-3.2, Qwen2.5))
+        
+        Script --> TRL
+        TRL --> LLM
+    end
+
+    Copilot <-->|JSON Actions / Observations| Env
+    LLM <-->|GRPO Rollouts| Env
+```
+
 ---
 
 ## Section 1 — Action & Observation Spaces

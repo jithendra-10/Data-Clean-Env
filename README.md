@@ -13,11 +13,16 @@ pinned: false
 DataClean-Env challenges LLM agents to clean realistic tabular datasets — null imputation, dtype correction, outlier clipping, deduplication, and more. Every episode is reproducible via a seeded generator. Every grader is a deterministic pandas assertion.
 
 [![OpenEnv Compliant](https://img.shields.io/badge/OpenEnv-Compliant-brightgreen)](https://openenv.dev)
-[![HF Spaces](https://img.shields.io/badge/HuggingFace-Spaces-orange)](https://huggingface.co/spaces/jithendra/dataclean-env)
+[![HF Spaces](https://img.shields.io/badge/HuggingFace-Spaces-orange)](https://huggingface.co/spaces/Jxth/DataClean_Env)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue)](./Dockerfile)
 
 ---
+
+## 📝 Hackathon Submission Materials
+* **[Read our Hackathon Blog Post: Training Enterprise Agents via Curriculum Shock](./blog.md)**
+* **HuggingFace Space:** [Jxth/DataClean_Env](https://huggingface.co/spaces/Jxth/DataClean_Env)
+* **Training Code:** Google Colab Notebooks and `training_script.py` are included in the repository files.
 
 ## Quick Start
 

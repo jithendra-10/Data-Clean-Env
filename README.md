@@ -20,8 +20,8 @@ DataClean-Env challenges LLM agents to clean realistic tabular datasets — null
 
 👉 **[Click Here to view the Live HuggingFace Space](https://huggingface.co/spaces/Jxth/DataClean_Env)**  
 👉 **[Blog Post](https://huggingface.co/spaces/Jxth/DataClean_Env/blob/main/blog.md)**  
-👉 **[Llama 3.2 GRPO Training Notebook (Colab)](#)** <!-- REPLACE '#' WITH YOUR COLAB URL -->  
-👉 **[Qwen 2.5 GRPO Training Notebook (Colab)](#)** <!-- REPLACE '#' WITH YOUR COLAB URL -->
+👉 **[Llama 3.2 GRPO Training Notebook (Colab)](https://colab.research.google.com/drive/1MzmWX_LtyNxkYYe0p1i_kjDktm6wAhO9?usp=sharing)**  
+👉 **[Qwen 2.5 GRPO Training Notebook (Colab)](https://colab.research.google.com/drive/1ElrAOSGIxHVjDWXg2iYUWyvAn8w57YSA?usp=sharing)**
 
 ---
 

@@ -470,11 +470,11 @@ def build_gradio_app(env_factory: Callable) -> Any:
                             "Three datasets, three difficulties, one strict grader."
                         )
                         gr.Markdown(
-                            "<div class='dc-section-title'>What you can do here</div>"
-                            "1. **Manual Console** &mdash; drive the env step-by-step yourself.  \n"
-                            "2. **Agent Copilot** &mdash; let a hosted LLM propose JSON actions via the HF Router.  \n"
-                            "3. **Reward + timeline** &mdash; inspect per-step shaping (dense RL signal).  \n"
-                            "4. **API** &mdash; call `/reset`, `/step`, `/grader` directly (`/docs`).",
+                            "<div class='dc-section-title'>Core Platform Capabilities</div>\n\n"
+                            "1. **Manual Console** &mdash; Drive the environment manually to simulate an RL rollout.  \n"
+                            "2. **Agent Copilot** &mdash; Connect a hosted LLM to autonomously issue JSON actions.  \n"
+                            "3. **Reward Timeline** &mdash; Inspect dense per-step shaping signals in real-time.  \n"
+                            "4. **API Endpoints** &mdash; Directly call `/reset`, `/step`, and `/grader` (`/docs`).",
                             elem_classes=["prose"],
                         )
                     with gr.Column(scale=1):

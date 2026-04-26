@@ -16,7 +16,10 @@ DataClean-Env challenges LLM agents to clean realistic tabular datasets — null
 [![HF Spaces](https://img.shields.io/badge/HuggingFace-Spaces-orange)](https://huggingface.co/spaces/Jxth/DataClean_Env)
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue)](./Dockerfile)
-[![Hackathon Blog](https://img.shields.io/badge/Hackathon-Blog_Post-red)](./blog.md)
+[![Hackathon Blog](https://img.shields.io/badge/Hackathon-Blog_Post-red)](https://huggingface.co/spaces/Jxth/DataClean_Env/blob/main/blog.md)
+
+👉 **[Click Here to view the Live HuggingFace Space](https://huggingface.co/spaces/Jxth/DataClean_Env)**  
+👉 **[Click Here to read the Hackathon Blog Post](https://huggingface.co/spaces/Jxth/DataClean_Env/blob/main/blog.md)**
 
 ---
 

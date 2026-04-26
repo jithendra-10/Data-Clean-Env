@@ -36,10 +36,17 @@ from dataclean.tasks import TASK_REGISTRY
 from dataclean.utils import parse_action, obs_to_prompt, SYSTEM_PROMPT
 
 # ── Config ────────────────────────────────────────────────────────────────────
-MODEL_ID       = "Qwen/Qwen2.5-0.5B-Instruct"   # fits free T4 (3GB VRAM)
-HF_REPO        = os.getenv("HF_REPO", "dataclean-grpo")
+# --- Choose your model! ---
+MODEL_NAME = 'Llama-3.2'  # Change to 'Qwen-2.5' to train Qwen!
+
+if MODEL_NAME == 'Llama-3.2':
+    MODEL_ID = 'meta-llama/Llama-3.2-1B-Instruct'
+elif MODEL_NAME == 'Qwen-2.5':
+    MODEL_ID = 'Qwen/Qwen2.5-0.5B-Instruct'
+    
+HF_REPO        = os.getenv("HF_REPO", f"dataclean-{MODEL_NAME.lower()}-grpo")
 SEED           = 42
-EPISODES_EPOCH = 60    # episodes per epoch (20 per task)
+EPISODES_EPOCH = 300    # episodes per epoch (100 per task)
 MAX_STEPS_EP   = 8     # steps per episode during training (speed)
 
 # Curriculum schedule: which tasks per epoch
@@ -94,7 +101,7 @@ def _env_reward_fn(completions: list[str], prompts: list[str],
 
 # ── Dataset builder ───────────────────────────────────────────────────────────
 
-def build_dataset(task_ids: list[str], n_per_task: int = 20) -> "Dataset":
+def build_dataset(task_ids: list[str], n_per_task: int = 100) -> "Dataset":
     """Generate prompts from env resets. task_ids = curriculum for this epoch."""
     samples = []
     for task_id in task_ids:
@@ -126,7 +133,9 @@ class RewardTracker:
     def record_epoch(self, mean_reward: float):
         self.epoch_means.append(mean_reward)
 
-    def save_plot(self, path: str = "reward_curve.png"):
+    def save_plot(self, path: str = None):
+        if path is None:
+            path = f"{MODEL_NAME}_reward_curve.png"
         try:
             import matplotlib.pyplot as plt
             fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
@@ -253,13 +262,14 @@ def main():
                 output_dir=f"grpo_epoch{epoch}",
                 num_train_epochs=1,
                 per_device_train_batch_size=2,
-                gradient_accumulation_steps=4,
-                learning_rate=2e-5 / epoch,   # decay LR per epoch
+                gradient_accumulation_steps=8,
+                learning_rate=3e-5,           # higher LR for GRPO
                 num_generations=4,
-                max_new_tokens=200,
-                max_prompt_length=512,
+                max_prompt_length=768,        # fix for context length warnings
+                max_completion_length=256,    # fix for max_new_tokens warnings
                 logging_steps=5,
-                save_steps=50,
+                save_strategy="no",
+                warmup_steps=5,
                 report_to="none",
             )
 
